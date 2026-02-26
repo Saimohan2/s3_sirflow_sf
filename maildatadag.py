@@ -116,14 +116,14 @@ with DAG(
     catchup=False,
 ) as dag:
 
-load_task=PythonOperator(
-    task_id='load_raw_mailing_data',
-    python_callable=load_data
+    load_task=PythonOperator(
+        task_id='load_raw_mailing_data',
+        python_callable=load_data
+        )
+
+    transform_task=PythonOperator(
+        task_id='transform_loaded_data',
+        python_callable=transform_data
     )
 
-transform_task=PythonOperator(
-    task_id='transform_loaded_data',
-    python_callable=transform_data
-)
-
-load_task>>transform_task
+    load_task>>transform_task
