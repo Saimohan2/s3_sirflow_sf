@@ -1,6 +1,10 @@
 # s3_sirflow_sf
 This project is to build a ETL pipeline (S3--->Airflow--->Snowflake)
 
+requirements.txt should be stored in S3 bucket to specify the connection, .py file should be stored inside dags folder that is created.
+
+Created MWAA to run Airflow environment.
+
 File type is a .csv file stored in S3 bucket, file contains 7000+ rows of structured, but unclean data, with nulls existing and unformatted colums.
 
 The DAG code's functionality primary has 2 tasks, first task being to load the file by establishing connection from S3 to snowflake using IAM roles and policies attached, subsequently creating file format, a table and stage to hold the connection to S3 bucket, finally loading the data to Snowflake using copy into command.
