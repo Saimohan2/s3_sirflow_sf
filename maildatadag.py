@@ -9,8 +9,8 @@ def load_data():
         password='xxxx',
         account='xxxx',
         warehouse='COMPUTE_WH',
-        database='xxxx',
-        schema='xxxx',
+        database='MYDATA',
+        schema='RAWDATA'
     )
 
     cs= conn.cursor()
@@ -40,7 +40,7 @@ def load_data():
         
         CREATE OR REPLACE FILE FORMAT CSV_FORMAT
         TYPE=CSV
-        FILE_OPTIONALLY_ENCLOSED_BY='"'
+        FIELD_OPTIONALLY_ENCLOSED_BY='"'
         SKIP_HEADER=1;""")
 
         cs.execute("""
@@ -89,7 +89,7 @@ def transform_data():
 
     try:
         cs.execute("""
-        CREATE TABLE HISTORICAL_TRANSFORMED AS
+        CREATE OR REPLACE TABLE HISTORICAL_TRANSFORMED AS
         SELECT
             ACCOUNT_NAME,
             FIRST_NAME,
